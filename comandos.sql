@@ -1,6 +1,7 @@
--- database: lms.sqlite
-UPDATE "users" SET "email" = 'renata@email.com', "updated" = CURRENT_TIMESTAMP WHERE "id" = 9;
+CREATE TRIGGER "set_users_updated"
+AFTER UPDATE ON "users"
+BEGIN
+  UPDATE "users" SET "updated" = CURRENT_TIMESTAMP WHERE "id" = NEW."id";
+END;
 
-UPDATE "users" SET "password_hash" = '123456' WHERE "id" = 9;
-
-UPDATE "sessions" SET "expires" = STRFTIME('%s','now','+15 days') WHERE "token" = '308DFB6F3E163514';
+UPDATE "users" SET "email" = 'renata5@email.com' WHERE "id" = 9;
